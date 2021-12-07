@@ -57,7 +57,7 @@ mRNAa=0
 mRNAas=0
 proteinAs=0
 proteinA=3000
-proteinN=3000
+proteinN=3200
 
 # Parameters
 

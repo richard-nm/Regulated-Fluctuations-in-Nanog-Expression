@@ -1,7 +1,7 @@
 from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
+
 import random
 
 # basic model
@@ -44,7 +44,7 @@ def simulation(number):
         a=random.randint(0,2000)
         b=random.randint(0,2000)
         init=[a,b]
-        y=odeint(model,init,t,mxstep=5000000)
+        y=odeint(model,init,t,mxstep=500000)
         plt.plot(a,b,'bo')
         plt.plot(y[:,0],y[:,1],alpha=0.2,color='green')
         plt.plot(y[-1:,0],y[-1:,1],'bs')
@@ -74,7 +74,6 @@ def get_arrow():
             plt.arrow(i,k,md[40][0]-i,md[40][1]-k,width=0.002)
 
 
-
 # parameters for equations   a-> alpha, b-> beta, c-> gama, d-> lambda
 aa=0.005
 an=0.1
@@ -88,34 +87,9 @@ cn=2.4e-4
 cx=0.01
 d=2e-7
 n=2
-p=1
+p=1.5
 
 # parameters for simulation
 x=y=np.logspace(2,4,num=100)
-s1=fsolve(steady,1500)
 t = np.logspace(0, 7, num=100)
 
-# draw plot
-plt.figure()
-get_arrow()
-simulation(5)
-# streamplot()
-plt.plot(x,nullN(x),label='Nanog')
-plt.plot(nulla(y),y,label='Oct4')
-plt.xlim([100,10000])
-plt.ylim([100,10000])
-plt.plot(s1,nullN(np.array(s1)),'ro')
-plt.xlabel('Nanog (# of molecules)')
-plt.ylabel('Oct4 (# of molecules)')
-plt.legend()
-plt.xscale('log')
-plt.yscale('log')
-plt.show()
-
-# draw integrate plot
-# plt.figure()
-# ry=odeint(model,[1000,1000],t,mxstep=500000)
-# plt.plot(t,ry[:,0],label='N')
-# plt.plot(t,ry[:,1],label='A')
-# plt.legend()
-# plt.show()
